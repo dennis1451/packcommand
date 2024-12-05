@@ -25,28 +25,28 @@ export function VideoUpload() {
   return (
     <div
       className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors
-        ${isDragging ? 'border-amber-500 bg-amber-50' : 'border-gray-300 hover:border-amber-400'}
-        ${uploadStatus === 'success' ? 'border-green-500 bg-green-50' : ''}`}
+        ${isDragging ? 'border-forest-500 bg-forest-50' : 'border-stone-300 hover:border-forest-400'}
+        ${uploadStatus === 'success' ? 'border-forest-500 bg-forest-50' : ''}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       {uploadStatus === 'idle' && (
         <>
-          <Upload className="mx-auto h-12 w-12 text-amber-500 mb-4" />
-          <p className="text-gray-600">Drag and drop your training video here</p>
-          <p className="text-sm text-gray-500 mt-2">or click to select a file</p>
+          <Upload className="mx-auto h-12 w-12 text-forest-500 mb-4" />
+          <p className="text-stone-600">Drag and drop your training video here</p>
+          <p className="text-sm text-stone-500 mt-2">or click to select a file</p>
         </>
       )}
       {uploadStatus === 'uploading' && (
         <div className="animate-pulse">
-          <p className="text-amber-600">Uploading video...</p>
+          <p className="text-forest-600">Uploading video...</p>
         </div>
       )}
       {uploadStatus === 'success' && (
         <>
-          <Check className="mx-auto h-12 w-12 text-green-500 mb-4" />
-          <p className="text-green-600">Video uploaded successfully!</p>
+          <Check className="mx-auto h-12 w-12 text-forest-500 mb-4" />
+          <p className="text-forest-600">Video uploaded successfully!</p>
         </>
       )}
     </div>

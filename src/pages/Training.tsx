@@ -1,26 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TrainingCard } from '../components/TrainingCard';
-
-const trainingGuides = [
-  {
-    command: 'sit',
-    description: 'Learn how to teach your dog the basic sit command with positive reinforcement.',
-    imageUrl: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    command: 'stay',
-    description: 'Master the stay command to improve your dog\'s impulse control and obedience.',
-    imageUrl: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    command: 'come',
-    description: 'Build a reliable recall command for better off-leash control and safety.',
-    imageUrl: 'https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=800',
-  },
-];
+import { CategorySection } from '../components/CategorySection';
+import { commands, commandCategories } from '../data/commands';
+import { CommandCategory } from '../types';
+import { Search } from 'lucide-react';
 
 export function Training() {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const filteredCommands = commands.filter(command =>
+    command.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    command.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const commandsByCategory = Object.keys(commandCategories).reduce((acc, category) => {
+    const categoryCommands = filteredCommands.filter(
+      command => command.category === category
+    );
+    if (categoryCommands.length > 0) {
+      acc[category as CommandCategory] = categoryCommands;
+    }
+    return acc;
+  }, {} as Record<CommandCategory, typeof commands>);
+
   return (
     <div className="space-y-8">
       <motion.div
@@ -28,24 +30,29 @@ export function Training() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center"
       >
-        <h1 className="text-4xl font-bold text-amber-900 mb-4">Training Guides</h1>
+        <h1 className="text-4xl font-bold text-amber-900 mb-4">Training Commands</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Master essential commands with our comprehensive training guides
+          Choose a command to start training your dog
         </p>
+        <div className="max-w-md mx-auto relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search commands..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+          />
+        </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {trainingGuides.map((guide, index) => (
-          <motion.div
-            key={guide.command}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-          >
-            <TrainingCard {...guide} />
-          </motion.div>
-        ))}
-      </div>
+      {Object.entries(commandsByCategory).map(([category, categoryCommands]) => (
+        <CategorySection
+          key={category}
+          category={category as CommandCategory}
+          commands={categoryCommands}
+        />
+      ))}
     </div>
   );
 }

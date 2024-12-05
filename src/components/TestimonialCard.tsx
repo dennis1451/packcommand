@@ -22,15 +22,15 @@ export function TestimonialCard({ name, image, text, rating }: TestimonialProps)
           className="w-16 h-16 rounded-full object-cover"
         />
         <div>
-          <h3 className="font-semibold text-lg text-gray-900">{name}</h3>
-          <div className="flex text-amber-400">
+          <h3 className="font-semibold text-lg text-pine-800">{name}</h3>
+          <div className="flex text-forest-400">
             {[...Array(rating)].map((_, i) => (
               <Star key={i} className="w-4 h-4 fill-current" />
             ))}
           </div>
         </div>
       </div>
-      <p className="text-gray-600 italic">{text}</p>
+      <p className="text-stone-600 italic">{text}</p>
     </motion.div>
   );
 }
