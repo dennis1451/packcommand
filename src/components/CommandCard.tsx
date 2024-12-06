@@ -14,10 +14,14 @@ export function CommandCard({ command }: CommandCardProps) {
       whileHover={{ scale: 1.02 }}
       className="bg-white rounded-lg shadow-md overflow-hidden"
     >
-      <div
-        className="h-48 bg-cover bg-center"
-        style={{ backgroundImage: `url(${command.imageUrl})` }}
-      />
+      <div className="relative h-48">
+        <img
+          src={command.imageUrl}
+          alt={`${command.name} command demonstration`}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+      </div>
       <div className="p-4">
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-lg font-semibold text-pine-800">{command.name}</h3>

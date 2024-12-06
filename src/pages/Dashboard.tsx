@@ -17,18 +17,15 @@ export function Dashboard() {
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center relative"
+        className="text-center relative bg-sand-50 rounded-lg py-16 px-4"
       >
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=1920')] opacity-10" />
-        <div className="relative">
-          <Dog className="mx-auto h-16 w-16 text-forest-600 mb-6" />
-          <h1 className="text-4xl font-bold text-pine-800 mb-4">
-            Welcome to Pack Command!
-          </h1>
-          <p className="text-lg text-stone-600 mb-8 max-w-2xl mx-auto">
-            Ready to start training your dog today? Choose a command to begin your training journey.
-          </p>
-        </div>
+        <Dog className="mx-auto h-16 w-16 text-forest-600 mb-6" />
+        <h1 className="text-4xl font-bold text-pine-800 mb-4">
+          Welcome to Pack Command!
+        </h1>
+        <p className="text-lg text-stone-600 mb-8 max-w-2xl mx-auto">
+          Ready to start training your dog today? Choose a command to begin your training journey.
+        </p>
       </motion.section>
 
       <section className="bg-white rounded-lg shadow-md p-8">

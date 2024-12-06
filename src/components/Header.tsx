@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dog, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -7,6 +7,11 @@ export function Header() {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
 
   const navLinks = [
     { path: '/', label: 'Dashboard' },
@@ -25,8 +30,9 @@ export function Header() {
           </Link>
 
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-md hover:bg-sand-100 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? (
               <X className="h-6 w-6 text-pine-800" />
@@ -53,22 +59,23 @@ export function Header() {
         </div>
 
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 space-y-2">
-            {navLinks.map(({ path, label }) => (
-              <Link
-                key={path}
-                to={path}
-                className={`block py-2 px-4 rounded-md transition-colors ${
-                  isActive(path)
-                    ? 'bg-forest-50 text-forest-600 font-semibold'
-                    : 'text-stone-700 hover:bg-sand-100'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+          <div className="md:hidden">
+            <nav className="mt-4 space-y-2 pb-2">
+              {navLinks.map(({ path, label }) => (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`block py-2 px-4 rounded-md transition-colors ${
+                    isActive(path)
+                      ? 'bg-forest-50 text-forest-600 font-semibold'
+                      : 'text-stone-700 hover:bg-sand-100'
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         )}
       </div>
     </header>
