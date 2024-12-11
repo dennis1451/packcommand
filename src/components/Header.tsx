@@ -8,7 +8,6 @@ export function Header() {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Close menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
@@ -21,23 +20,23 @@ export function Header() {
   ];
 
   return (
-    <header className="bg-sand-50 border-b border-sand-200 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <header className="bg-white sticky top-0 z-50 border-b border-neutral-200">
+      <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3">
-            <Dog className="h-8 w-8 text-forest-600" />
-            <h1 className="text-2xl font-bold text-pine-800">Pack Command</h1>
+          <Link to="/" className="flex items-center space-x-2">
+            <Dog className="h-8 w-8 text-primary-500" />
+            <h1 className="text-xl font-bold text-navy-900">Pack Command</h1>
           </Link>
 
           <button
-            className="md:hidden p-2 rounded-md hover:bg-sand-100 transition-colors"
+            className="md:hidden p-2 hover:bg-neutral-100 rounded-lg"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-pine-800" />
+              <X className="h-6 w-6 text-navy-900" />
             ) : (
-              <Menu className="h-6 w-6 text-pine-800" />
+              <Menu className="h-6 w-6 text-navy-900" />
             )}
           </button>
 
@@ -46,10 +45,10 @@ export function Header() {
               <Link
                 key={path}
                 to={path}
-                className={`transition-colors ${
+                className={`text-sm font-semibold transition-colors ${
                   isActive(path)
-                    ? 'text-forest-600 font-semibold'
-                    : 'text-stone-700 hover:text-forest-500'
+                    ? 'text-primary-500'
+                    : 'text-navy-600 hover:text-primary-400'
                 }`}
               >
                 {label}
@@ -59,23 +58,21 @@ export function Header() {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden">
-            <nav className="mt-4 space-y-2 pb-2">
-              {navLinks.map(({ path, label }) => (
-                <Link
-                  key={path}
-                  to={path}
-                  className={`block py-2 px-4 rounded-md transition-colors ${
-                    isActive(path)
-                      ? 'bg-forest-50 text-forest-600 font-semibold'
-                      : 'text-stone-700 hover:bg-sand-100'
-                  }`}
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <nav className="md:hidden mt-3 space-y-1 border-t border-neutral-200 pt-3">
+            {navLinks.map(({ path, label }) => (
+              <Link
+                key={path}
+                to={path}
+                className={`block py-2 px-4 rounded-lg ${
+                  isActive(path)
+                    ? 'bg-primary-50 text-primary-500 font-semibold'
+                    : 'text-navy-600 hover:bg-neutral-50'
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
         )}
       </div>
     </header>

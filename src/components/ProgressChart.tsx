@@ -7,18 +7,18 @@ interface ProgressChartProps {
 
 export function ProgressChart({ progress }: ProgressChartProps) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold text-pine-800 mb-4">Training Progress</h2>
-      <div className="space-y-4">
+    <div className="card p-6">
+      <h2 className="text-xl font-semibold text-navy-800 mb-6">Training Progress</h2>
+      <div className="space-y-6">
         {progress.map((item) => (
-          <div key={item.command}>
+          <div key={item.command} className="space-y-2">
             <div className="flex justify-between mb-1">
-              <span className="text-stone-700 capitalize">{item.command}</span>
-              <span className="text-stone-600">{item.successRate}%</span>
+              <span className="text-navy-700 font-medium capitalize">{item.command}</span>
+              <span className="text-primary-600 font-semibold">{item.successRate}%</span>
             </div>
-            <div className="w-full bg-sand-100 rounded-full h-2">
+            <div className="w-full bg-neutral-100 rounded-full h-3">
               <div
-                className="bg-forest-500 rounded-full h-2"
+                className="bg-primary-500 rounded-full h-3 transition-all duration-500"
                 style={{ width: `${item.successRate}%` }}
               />
             </div>

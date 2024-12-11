@@ -66,19 +66,19 @@ export function FloatingChatBubble() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-96 max-w-[calc(100vw-3rem)] bg-white rounded-lg shadow-xl overflow-hidden"
+            className="mb-4 w-96 max-w-[calc(100vw-3rem)] bg-white rounded-2xl shadow-xl overflow-hidden border border-amber-100"
           >
-            <div className="flex items-center justify-between p-4 border-b border-sand-200 bg-forest-50">
+            <div className="flex items-center justify-between p-4 border-b border-neutral-200 bg-amber-50">
               <div className="flex items-center space-x-3">
-                <Dog className="h-6 w-6 text-forest-600" />
+                <Dog className="h-6 w-6 text-brown-600" />
                 <div>
-                  <h2 className="font-semibold text-pine-800">Pack Commander</h2>
-                  <p className="text-xs text-stone-600">Professional Training Assistant</p>
+                  <h2 className="font-semibold text-brown-800">Pack Commander</h2>
+                  <p className="text-xs text-brown-600">Professional Training Assistant</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-stone-500 hover:text-stone-700"
+                className="text-brown-500 hover:text-brown-700 transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -93,10 +93,10 @@ export function FloatingChatBubble() {
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-lg ${
+                    className={`max-w-[80%] p-3 rounded-xl ${
                       message.sender === 'user'
-                        ? 'bg-forest-500 text-white'
-                        : 'bg-sand-50 text-stone-800'
+                        ? 'bg-brown-600 text-white'
+                        : 'bg-amber-50 text-brown-800'
                     }`}
                   >
                     <p className="text-sm">{message.content}</p>
@@ -115,18 +115,18 @@ export function FloatingChatBubble() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-sand-50 p-3 rounded-lg">
+                  <div className="bg-amber-50 p-3 rounded-xl">
                     <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-forest-500 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-forest-500 rounded-full animate-bounce delay-100" />
-                      <div className="w-2 h-2 bg-forest-500 rounded-full animate-bounce delay-200" />
+                      <div className="w-2 h-2 bg-brown-500 rounded-full animate-bounce" />
+                      <div className="w-2 h-2 bg-brown-500 rounded-full animate-bounce delay-100" />
+                      <div className="w-2 h-2 bg-brown-500 rounded-full animate-bounce delay-200" />
                     </div>
                   </div>
                 </motion.div>
               )}
             </div>
 
-            <div className="p-4 border-t border-sand-200">
+            <div className="p-4 border-t border-neutral-200 bg-white">
               <div className="flex space-x-2">
                 <input
                   type="text"
@@ -134,12 +134,12 @@ export function FloatingChatBubble() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask about dog training..."
-                  className="flex-1 p-2 text-sm border border-sand-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-500"
+                  className="flex-1 p-2 text-sm border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brown-500/20 focus:border-brown-500"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isTyping}
-                  className="p-2 bg-forest-500 text-white rounded-lg hover:bg-forest-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 bg-brown-600 text-white rounded-xl hover:bg-brown-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <Send className="h-5 w-5" />
                 </button>
@@ -152,8 +152,9 @@ export function FloatingChatBubble() {
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
+        whileHover={{ scale: 1.1 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-forest-600 text-white p-4 rounded-full shadow-lg hover:bg-forest-700 transition-colors"
+        className="bg-brown-600 text-white p-4 rounded-full shadow-lg hover:bg-brown-700 transition-all duration-200 ring-4 ring-white"
       >
         {isOpen ? (
           <X className="h-6 w-6" />

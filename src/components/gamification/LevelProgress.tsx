@@ -16,14 +16,14 @@ export function LevelProgress() {
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white rounded-lg shadow-md p-6"
+      className="card p-6"
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-xl font-semibold text-pine-800">Level {userProgress.level}</h3>
-          <p className="text-stone-600">Training Master</p>
+          <h3 className="text-xl font-semibold text-brown-800">Level {userProgress.level}</h3>
+          <p className="text-brown-600">Training Master</p>
         </div>
-        <Trophy className="h-8 w-8 text-forest-500" />
+        <Trophy className="h-8 w-8 text-amber-500" />
       </div>
 
       <div className="w-32 h-32 mx-auto mb-4">
@@ -31,21 +31,27 @@ export function LevelProgress() {
           value={progressPercentage}
           text={`${Math.round(progressPercentage)}%`}
           styles={buildStyles({
-            pathColor: '#2E7D32',
-            textColor: '#2E7D32',
-            trailColor: '#E8F5E9'
+            pathColor: '#8B4513',
+            textColor: '#8B4513',
+            trailColor: '#FCF5E5',
+            pathTransition: 'stroke-dashoffset 1s ease-in-out'
           })}
         />
       </div>
 
-      <div className="text-center">
-        <p className="text-stone-600">
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <p className="text-brown-700 font-medium">
           {userProgress.experience} / {userProgress.nextLevelExperience} XP
         </p>
-        <p className="text-sm text-stone-500 mt-2">
+        <p className="text-sm text-brown-500 mt-2">
           {Math.ceil(userProgress.nextLevelExperience - userProgress.experience)} XP until next level
         </p>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

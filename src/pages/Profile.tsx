@@ -21,28 +21,28 @@ export function Profile() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 px-4 py-6 md:py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-lg shadow-md p-6"
+        className="card p-6"
       >
         <div className="flex items-center space-x-4 mb-6">
-          <div className="bg-forest-100 p-3 rounded-full">
-            <User className="h-6 w-6 text-forest-600" />
+          <div className="bg-primary-100 p-3 rounded-full">
+            <User className="h-6 w-6 text-primary-600" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-pine-800">
+            <h2 className="text-xl font-semibold text-navy-800">
               {user?.email || 'User Profile'}
             </h2>
-            <p className="text-stone-600">Member since {new Date().toLocaleDateString()}</p>
+            <p className="text-navy-600">Member since {new Date().toLocaleDateString()}</p>
           </div>
         </div>
 
         <div className="flex space-x-4">
           <button
             onClick={() => {/* TODO: Implement settings */}}
-            className="flex items-center space-x-2 px-4 py-2 text-stone-600 hover:text-forest-600 transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 text-navy-600 hover:text-primary-600 transition-colors"
           >
             <Settings className="h-5 w-5" />
             <span>Settings</span>
@@ -63,22 +63,26 @@ export function Profile() {
         transition={{ delay: 0.1 }}
         className="flex justify-between items-center"
       >
-        <h2 className="text-2xl font-bold text-pine-800">Your Dogs</h2>
+        <h2 className="text-2xl font-bold text-navy-800">Your Dogs</h2>
         <button
           onClick={() => setShowAddDog(true)}
-          className="flex items-center space-x-2 px-4 py-2 bg-forest-600 text-white rounded-md hover:bg-forest-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-forest-500"
+          className="btn-primary inline-flex items-center"
         >
-          <Plus className="h-5 w-5" />
+          <Plus className="h-5 w-5 mr-2" />
           <span>Add Dog</span>
         </button>
       </motion.div>
 
       {showAddDog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
-            <h2 className="text-xl font-semibold text-pine-800 mb-4">Add New Dog</h2>
+        <div className="fixed inset-0 bg-navy-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full"
+          >
+            <h2 className="text-xl font-semibold text-navy-800 mb-4">Add New Dog</h2>
             <DogForm onClose={() => setShowAddDog(false)} />
-          </div>
+          </motion.div>
         </div>
       )}
 
